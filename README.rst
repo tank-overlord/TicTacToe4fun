@@ -41,6 +41,15 @@ Execute
 >>> game.trials(verbosity=1, n_trials=1)
 
 
+Sample Screenshot
+-----------------
+|image1|
+
+
+.. |image1| image:: https://github.com/tank-overlord/chess4fun/raw/main/TicTacToe4fun/examples/game1.png
+
+
+
 Have fun!!!
 -----------
 

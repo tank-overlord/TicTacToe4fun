@@ -40,9 +40,6 @@ Execute
 >>> game.trials()
 >>> game.trials(verbosity=1, n_trials=1)
 
-::
-
---------
 Game#1
 
 |   |

@@ -35,7 +35,53 @@ Execute
 
 .. code-block::
 
-   python -m TicTacToe4fun
+
+>>> from TicTacToe4fun.tic_tac_toe import play
+>>> play().trials(verbosity=1, n_trials=1)
+--------
+Game#1
+
+|   |
+|   |
+|   |
+
+| O |
+|   |
+|   |
+
+| O |
+| X |
+|   |
+
+| O |
+| X |
+|O  |
+
+|XO |
+| X |
+|O  |
+
+|XO |
+| X |
+|O O|
+
+|XO |
+| X |
+|OXO|
+
+|XOO|
+| X |
+|OXO|
+
+|XOO|
+| XX|
+|OXO|
+
+|XOO|
+|OXX|
+|OXO|
+
+X won #: 0, O won #: 0, Draw #: 1
 
 
 Have fun!!!

@@ -10,4 +10,10 @@ from .__about__ import (
     __license__,
 )
 
-__all__ = ["tic_tac_toe", ]
+from .tic_tac_toe import play
+
+# this is for "from <package_name> import *"
+__all__ = ["play", ]
+
+
+

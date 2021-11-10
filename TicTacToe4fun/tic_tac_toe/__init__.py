@@ -6,4 +6,5 @@
 
 from ._play import play
 
+# this is for "from <package_name>.tic_tac_toe import *"
 __all__ = ["play",]

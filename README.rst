@@ -36,8 +36,9 @@ Execute
 .. code-block::
 
 
->>> from TicTacToe4fun.tic_tac_toe import play
->>> play().trials(verbosity=1, n_trials=1)
+>>> from TicTacToe4fun import play
+>>> game = play()
+>>> game.trials(verbosity=1, n_trials=1)
 --------
 Game#1
 

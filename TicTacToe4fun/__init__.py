@@ -10,5 +10,4 @@ from .__about__ import (
     __license__,
 )
 
-
-__all__ = ["tic-tac-toe", ]
+__all__ = ["tic_tac_toe", ]

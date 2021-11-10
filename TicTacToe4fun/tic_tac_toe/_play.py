@@ -95,11 +95,12 @@ class play():
                 self.minimizer_score_history[str_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
             return self.minimizer_score_history[str_B]['best_score']
 
-    def minimax_vs_minimax(self):
+    def minimax_vs_minimax(self, verbosity = 0):
         B = {1: ' ', 2: ' ', 3: ' ',
             4: ' ', 5: ' ', 6: ' ',
             7: ' ', 8: ' ', 9: ' '}
-        #printboard(B)
+        if verbosity == 1:
+            self.printboard(B)
         if random.randint(1,2) == 1:
             turn = 'X'
         else:
@@ -146,14 +147,16 @@ class play():
                 omove = random.sample(O_all_scores[O_best_score], 1)[0]
                 B[omove] = 'O'
                 turn = 'X'
-            self.printboard(B)
+            if verbosity == 1:
+                self.printboard(B)
         return self.checkwin(B)
 
-    def trials(self):
+    def trials(self, verbosity = 0):
         x_won, o_won, draw = 0, 0, 0
         for i in range(1, 10001):
-            print(f"--------\nGame#{i}\n")
-            res = self.minimax_vs_minimax()
+            if verbosity == 1:
+                print(f"--------\nGame#{i}\n")
+            res = self.minimax_vs_minimax(verbosity = verbosity)
             if res == 1:
                 x_won += 1
             elif res == -1:

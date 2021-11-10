@@ -6,7 +6,7 @@
  
 import sys
 
-from .tic-tac-toe import play
+from .tic_tac_toe import play
 
 if __name__ == "__main__":
-    sys.exit(play().trials())
+    sys.exit(play().trials(verbosity=1))

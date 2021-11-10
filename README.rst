@@ -35,7 +35,6 @@ Execute
 
 .. code-block::
 
-
 >>> from TicTacToe4fun import play
 >>> game = play()
 >>> game.trials(verbosity=1, n_trials=1)

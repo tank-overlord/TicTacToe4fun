@@ -33,8 +33,6 @@ Install
 Execute
 -------
 
-.. code-block::
-
 >>> from TicTacToe4fun import play
 >>> game = play()
 >>> game.trials()

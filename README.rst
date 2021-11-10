@@ -46,7 +46,7 @@ Sample Screenshot
 |image1|
 
 
-.. |image1| image:: https://github.com/tank-overlord/chess4fun/raw/main/TicTacToe4fun/examples/game1.png
+.. |image1| image:: https://github.com/tank-overlord/TicTacToe4fun/raw/main/TicTacToe4fun/examples/game1.png
 
 
 

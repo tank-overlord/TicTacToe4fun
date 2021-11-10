@@ -2,8 +2,8 @@
 
 |BuildTest|_ |PyPi|_ |License|_ |Downloads|_ |PythonVersion|_
 
-.. |BuildTest| image:: https://travis-ci.com/github/tank-overlord/TicTacToe4fun.svg?branch=main
-.. _BuildTest: https://travis-ci.com/github/tank-overlord/TicTacToe4fun
+.. |BuildTest| image:: https://travis-ci.com/tank-overlord/TicTacToe4fun.svg?branch=main
+.. _BuildTest: https://travis-ci.com/tank-overlord/TicTacToe4fun
 
 .. |PythonVersion| image:: https://img.shields.io/badge/python-3.8%20%7C%203.9-blue
 .. _PythonVersion: https://img.shields.io/badge/python-3.8%20%7C%203.9-blue

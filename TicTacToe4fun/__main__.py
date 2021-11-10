@@ -9,4 +9,4 @@ import sys
 from .tic_tac_toe import play
 
 if __name__ == "__main__":
-    sys.exit(play().trials(verbosity=1))
+    sys.exit(play().trials(verbosity=1, n_trials=10))

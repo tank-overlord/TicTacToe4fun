@@ -151,9 +151,9 @@ class play():
                 self.printboard(B)
         return self.checkwin(B)
 
-    def trials(self, verbosity = 0):
+    def trials(self, verbosity = 0, n_trials = 100):
         x_won, o_won, draw = 0, 0, 0
-        for i in range(1, 10001):
+        for i in range(1, n_trials+1):
             if verbosity == 1:
                 print(f"--------\nGame#{i}\n")
             res = self.minimax_vs_minimax(verbosity = verbosity)

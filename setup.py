@@ -19,7 +19,7 @@ setuptools.setup(
     version=TicTacToe4fun.__version__,
     author="Tank Overlord",
     author_email="TankOverLord88@gmail.com",
-    description="A Fun Experiment of Tic-Tac-Toe",
+    description="A Fun Experiment of Tic-Tac-Toe!",
     license=TicTacToe4fun.__license__,
     long_description=long_description,
     long_description_content_type="text/x-rst",

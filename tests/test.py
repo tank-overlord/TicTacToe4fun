@@ -6,5 +6,6 @@
 
 from TicTacToe4fun import play
 game = play()
+game.trials(n_trials=10000)
 game.trials(verbosity=1, n_trials=1)
-game.trials(verbosity=0, n_trials=10000)
+

@@ -36,7 +36,7 @@ Execute
 >>> from TicTacToe4fun import play
 >>> game = play()
 >>> game.trials()
-X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.692 sec
+X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.600 sec
 >>> game.trials(verbosity=1, n_trials=1)
 
 

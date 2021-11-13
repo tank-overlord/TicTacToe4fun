@@ -15,52 +15,32 @@ class play():
 
     def __init__(self):
         self.use_alpha_beta_pruning = True
-        self.maximizer_score_history = {}
-        self.minimizer_score_history = {}
-        self.X_all_scores_history = {}
-        self.O_all_scores_history = {}
+        self.maximizer_score_history, self.minimizer_score_history = {}, {}
+        self.X_all_scores_history, self.O_all_scores_history = {}, {}
 
     def find_empty_squares(self, B: dict = None):
-        empty_squares = []
-        for key in B:
-            if B[key] == ' ':
-                empty_squares.append(key)
-        return empty_squares
+        return [key for key in B if B[key] == ' ']
 
     def printboard(self, B: dict = None):
         print(f"|{B[1]}{B[2]}{B[3]}|\n"
-            f"|{B[4]}{B[5]}{B[6]}|\n"
-            f"|{B[7]}{B[8]}{B[9]}|\n")
+              f"|{B[4]}{B[5]}{B[6]}|\n"
+              f"|{B[7]}{B[8]}{B[9]}|\n")
 
     def checkwin(self, B: dict = None):
         """
         1 = X won
         0 = Draw
-        -1 = X won
+        -1 = O won
         None = not terminal state
         """
-        for r in [1,4,7]:
-            this_row = (B[r], B[r+1], B[r+2])
-            if this_row == ('X', 'X', 'X'):
+        for triplet in ((1,2,3),(4,5,6),(7,8,9),(1,4,7),(2,5,8),(3,6,9),(1,5,9),(3,5,7)):
+            if B[triplet[0]] == 'X' and B[triplet[1]] == 'X' and B[triplet[2]] == 'X':
                 return 1
-            elif this_row == ('O', 'O', 'O'):
+            elif B[triplet[0]] == 'O' and B[triplet[1]] == 'O' and B[triplet[2]] == 'O':
                 return -1
-        for c in [1,2,3]:
-            this_col = (B[c], B[c+3], B[c+6])
-            if this_col == ('X', 'X', 'X'):
-                return 1
-            elif this_col == ('O', 'O', 'O'):
-                return -1
-        this_diagnoal_1 = (B[1], B[5], B[9])
-        this_diagnoal_2 = (B[3], B[5], B[7])
-        if this_diagnoal_1 == ('X', 'X', 'X') or this_diagnoal_2 == ('X', 'X', 'X'):
-            return 1
-        elif this_diagnoal_1 == ('O', 'O', 'O') or this_diagnoal_2 == ('O', 'O', 'O'):
-            return -1
-        for i in range(1, 10):
-            if B[i] == ' ':
-                return None
-        return 0
+        if self.find_empty_squares(B) == []: # this must be placed here, after checking XXX and OOO, because X or O can have won when no more available moves
+            return 0 # Draw
+        return None # not terminal state
 
     def minimax_score(self, B: dict = None, alpha = float('-inf'), beta = float('+inf'), isMaximizing: bool = True):
         score = self.checkwin(B)
@@ -97,11 +77,11 @@ class play():
             return self.minimizer_score_history[str_B]['best_score']
 
     def minimax_vs_minimax(self, verbosity = 0):
-        B = {1: ' ', 2: ' ', 3: ' ',
-            4: ' ', 5: ' ', 6: ' ',
-            7: ' ', 8: ' ', 9: ' '}
-        if verbosity == 1:
-            self.printboard(B)
+        B = {1: ' ', 2: ' ', 3: ' ', 
+             4: ' ', 5: ' ', 6: ' ', 
+             7: ' ', 8: ' ', 9: ' '}
+        #if verbosity == 1:
+        #    self.printboard(B)
         if random.randint(1,2) == 1:
             turn = 'X'
         else:

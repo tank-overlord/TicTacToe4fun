@@ -8,7 +8,7 @@ import random
 import time
 
 """
-Key takeaway: you need to visit all the terminal leaf nodes in order to get the global true scores of the parent nodes.
+Key takeaway: you need to visit all the terminal leaf nodes in order to get the global best scores.
 """
 
 class play():

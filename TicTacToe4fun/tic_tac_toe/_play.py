@@ -5,6 +5,7 @@
 # License: MIT
 
 import random
+import time
 
 """
 Key takeaway: you need to visit all the terminal leaf nodes in order to get the global true scores of the parent nodes.
@@ -151,11 +152,12 @@ class play():
                 self.printboard(B)
         return self.checkwin(B)
 
-    def trials(self, verbosity = 0, n_trials = 100):
+    def trials(self, verbosity = 0, n_trials = 10000):
         x_won, o_won, draw = 0, 0, 0
+        start = time.time()
         for i in range(1, n_trials+1):
             if verbosity == 1:
-                print(f"--------\nGame#{i}\n")
+                print(f"--------\nGame #{i}\n")
             res = self.minimax_vs_minimax(verbosity = verbosity)
             if res == 1:
                 x_won += 1
@@ -163,4 +165,5 @@ class play():
                 o_won += 1
             else:
                 draw += 1
-        print(f"X won #: {x_won}, O won #: {o_won}, Draw #: {draw}")
+        end = time.time()
+        print(f"X won #: {x_won}, O won #: {o_won}, Draw #: {draw:,d}, Elapsed time: {end - start:.3f} sec")

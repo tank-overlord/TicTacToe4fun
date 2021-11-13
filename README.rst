@@ -18,9 +18,9 @@
 .. _License: https://pypi.python.org/pypi/TicTacToe4fun
 
 
-===============================
-A Fun Experiment of Tic Tac Toe
-===============================
+================================
+A Fun Experiment of Tic Tac Toe!
+================================
 
 Install
 -------
@@ -36,6 +36,7 @@ Execute
 >>> from TicTacToe4fun import play
 >>> game = play()
 >>> game.trials()
+X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.692 sec
 >>> game.trials(verbosity=1, n_trials=1)
 
 

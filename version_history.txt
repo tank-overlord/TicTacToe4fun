@@ -1,3 +1,8 @@
-Nov 10, 2021
+Nov 13, 2021
+------------
+version 0.0.3: add measurement of elapsed time
 
+
+Nov 10, 2021
+------------
 version 0.0.1 - 0.0.2: minimax vs. minimax, using both hashmap and alpha-beta pruning to speed up

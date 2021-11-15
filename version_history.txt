@@ -1,6 +1,6 @@
 Nov 13, 2021
 ------------
-version 0.0.3 ~ 0.0.4: add measurement of elapsed time
+version 0.0.3 ~ 0.0.5: add measurement of elapsed time
 
 
 Nov 10, 2021

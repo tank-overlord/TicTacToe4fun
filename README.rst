@@ -39,7 +39,7 @@ Run
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 3.954 sec
 >>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = False, use_alpha_beta_pruning = True) # α-β pruning speeds up
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.264 sec
->>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # initial hashmap building takes ~2MB and 0.1s on my computer
+>>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # initial hashmap building takes ~2MB and ~0.1s on my computer
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.102 sec
 >>> g.trials(n_trials = 10000, verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # afterwards, a lot faster; 10k trials completed in less than 1 sec
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.860 sec
@@ -49,12 +49,13 @@ board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.000 sec
 
 >>> from TicTacToe4fun import game # 4x4 example below
 >>> g = game()
->>> g.trials(n_trials = 1, verbosity = 0, board_dims = (4, 4)) # initial hashmap building takes ~5GB and 8min on my computer
->>> g.trials(n_trials = 10000, verbosity = 0, board_dims = (4, 4)) # afterwards, a lot faster; 10k trials completed in ~10 sec
-board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 10.039 sec
->>> g.trials(n_trials = 1, verbosity = 1, board_dims = (4, 4)) # print the board for details. 1 trial completed in 0.002 sec
+>>> g.trials(n_trials = 1, verbosity = 0, board_dims = (4, 4)) # initial hashmap building takes ~5GB and ~9min on my computer
+board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 533.661 sec
+>>> g.trials(n_trials = 10000, verbosity = 0, board_dims = (4, 4)) # afterwards, a lot faster; 10k trials completed in ~11 sec
+board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 11.273 sec
+>>> g.trials(n_trials = 1, verbosity = 1, board_dims = (4, 4)) # print the board for details. 1 trial completed in 0.003 sec
 ... (board details skiped) ...
-board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.002 sec
+board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.003 sec
 
 
 Sample Screenshot

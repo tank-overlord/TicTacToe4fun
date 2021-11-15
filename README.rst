@@ -33,7 +33,6 @@ Install
 Run
 ---
 
-# (3, 3)
 >>> from TicTacToe4fun import game
 >>> g = game()
 >>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = False, use_alpha_beta_pruning = False) # very slow, without using any computational technique
@@ -48,7 +47,6 @@ board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.860
 ... (board details skiped) ...
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.000 sec
 
-# (4, 4)
 >>> from TicTacToe4fun import game
 >>> g = game()
 >>> g.trials(n_trials = 1, verbosity = 0, board_dims = (4, 4)) # initial hashmap building takes ~5GB and 8min on my computer

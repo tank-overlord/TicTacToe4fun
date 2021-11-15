@@ -1,4 +1,4 @@
-version 0.0.7: add arguments to trials()
+version 0.0.7: add arguments to trials(), and trace memory allocation
 
 
 Nov 14, 2021

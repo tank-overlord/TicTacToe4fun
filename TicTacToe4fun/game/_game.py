@@ -323,9 +323,11 @@ class game():
         else:
             self.board_dims = board_dims
         x_won, o_won, draw = 0, 0, 0
-        start = time.time()
         tracemalloc.start()
         self.snapshot1 = tracemalloc.take_snapshot()
+        stats1 = self.snapshot1.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
+        memory_allocated1 = sum(stat.size for stat in stats1)
+        self.start = time.time()
         for i in range(1, n_trials+1):
             if self.verbosity == 1:
                 print(f"--------\nGame #{i}\n")
@@ -336,8 +338,8 @@ class game():
                 o_won += 1
             else:
                 draw += 1
+        self.end = time.time()
         self.snapshot2 = tracemalloc.take_snapshot()
-        end = time.time()
-        top_stats = self.snapshot2.compare_to(self.snapshot1, 'lineno') # https://docs.python.org/3/library/tracemalloc.html
-        memory_diff_in_trials = sum(stat.size for stat in top_stats)
-        print(f"board_dims = {self.board_dims}, X won #: {x_won}, O won #: {o_won}, Draw #: {draw:,d}, Elapsed time: {end - start:.3f} sec, Memory allocated: {memory_diff_in_trials:,d} KiB")
+        stats2 = self.snapshot2.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
+        memory_allocated2 = sum(stat.size for stat in stats2)
+        print(f"board_dims = {self.board_dims}, X won #: {x_won}, O won #: {o_won}, draw #: {draw:,d}, elapsed time: {self.end - self.start:.3f} sec, incremental memory allocated: {(memory_allocated2 - memory_allocated1):,d} KiB")

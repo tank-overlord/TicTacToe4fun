@@ -307,7 +307,7 @@ class game():
                 self.printboard(B = B)
         return self.checkwin(B = B)
 
-    def trials(self, n_trials = 10000, verbosity = 0, board_dims = (3, 3), use_hashmap = True, use_alpha_beta_pruning = True, test_early_draw = False, use_alternating_starting_turn = False):
+    def trials(self, n_trials = 10000, verbosity = 0, board_dims = (3, 3), use_hashmap = True, use_alpha_beta_pruning = True, test_early_draw = False, use_alternating_starting_turn = False, track_memory_usage = True):
         """
         board_dims = (r, c)
         """
@@ -323,10 +323,11 @@ class game():
         else:
             self.board_dims = board_dims
         x_won, o_won, draw = 0, 0, 0
-        tracemalloc.start()
-        self.snapshot1 = tracemalloc.take_snapshot()
-        stats1 = self.snapshot1.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
-        memory_allocated1 = sum(stat.size for stat in stats1)
+        if track_memory_usage:
+            tracemalloc.start()
+            self.snapshot1 = tracemalloc.take_snapshot()
+            stats1 = self.snapshot1.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
+            memory_allocated1 = sum(stat.size for stat in stats1)
         self.start = time.time()
         for i in range(1, n_trials+1):
             if self.verbosity == 1:
@@ -339,7 +340,11 @@ class game():
             else:
                 draw += 1
         self.end = time.time()
-        self.snapshot2 = tracemalloc.take_snapshot()
-        stats2 = self.snapshot2.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
-        memory_allocated2 = sum(stat.size for stat in stats2)
-        print(f"board_dims = {self.board_dims}, X won #: {x_won}, O won #: {o_won}, draw #: {draw:,d}, elapsed time: {self.end - self.start:.3f} sec, incremental memory allocated: {(memory_allocated2 - memory_allocated1):,d} KiB")
+        if track_memory_usage:
+            self.snapshot2 = tracemalloc.take_snapshot()
+            stats2 = self.snapshot2.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
+            memory_allocated2 = sum(stat.size for stat in stats2)
+            add_info = f", incremental memory allocated: {(memory_allocated2 - memory_allocated1):,d} KiB"
+        else:
+            add_info = ""
+        print(f"board_dims = {self.board_dims}, X won #: {x_won}, O won #: {o_won}, draw #: {draw:,d}, elapsed time: {self.end - self.start:.3f} sec{add_info}")

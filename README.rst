@@ -30,19 +30,20 @@ Install
    pip install TicTacToe4fun
 
 
-Execute
--------
+Run
+---
 
 >>> from TicTacToe4fun import game
 >>> g = game()
 >>> g.trials(n_trials = 10000,  verbosity = 0, board_dims = (3, 3))
-X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.719 sec
+board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.869 sec
 >>> g.trials(n_trials = 1,      verbosity = 1, board_dims = (3, 3))
+board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.001 sec
 >>> ...
 >>> g.trials(n_trials = 10000,  verbosity = 0, board_dims = (4, 4))
-X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 5.090 sec
+board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 10.039 sec
 >>> g.trials(n_trials = 1,      verbosity = 1, board_dims = (4, 4))
-
+board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.002 sec
 
 Sample Screenshot
 -----------------

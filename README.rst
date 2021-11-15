@@ -35,24 +35,24 @@ Run
 
 >>> from TicTacToe4fun import game
 >>> g = game()
->>> g.trials(n_trials = 1,  verbosity = 0, use_hashmap = False, use_alpha_beta_pruning = False) # very slow, without using any computational technique
+>>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = False, use_alpha_beta_pruning = False) # very slow, without using any computational technique
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 3.954 sec
->>> g.trials(n_trials = 1,  verbosity = 0, use_hashmap = False, use_alpha_beta_pruning = True) # α-β pruning speeds up
+>>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = False, use_alpha_beta_pruning = True) # α-β pruning speeds up
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.264 sec
->>> g.trials(n_trials = 1,  verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # initial hashmap building takes ~2MB and 0.1s on my computer
+>>> g.trials(n_trials = 1, verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # initial hashmap building takes ~2MB and 0.1s on my computer
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.102 sec
->>> g.trials(n_trials = 10000,  verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # afterwards, a lot faster; 10k trials completed in less than 1 sec
+>>> g.trials(n_trials = 10000, verbosity = 0, use_hashmap = True, use_alpha_beta_pruning = True) # afterwards, a lot faster; 10k trials completed in less than 1 sec
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.860 sec
->>> g.trials(n_trials = 1,  verbosity = 1, use_hashmap = True, use_alpha_beta_pruning = True) # print the board for details. 1 trial completed in less than 0.001 sec
+>>> g.trials(n_trials = 1, verbosity = 1, use_hashmap = True, use_alpha_beta_pruning = True) # print the board for details. 1 trial completed in less than 0.001 sec
 ... (board details skiped) ...
 board_dims = (3, 3), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.000 sec
 
 >>> from TicTacToe4fun import game
 >>> g = game()
->>> g.trials(n_trials = 1,  verbosity = 0, board_dims = (4, 4)) # initial hashmap building takes ~5GB and 8min on my computer
->>> g.trials(n_trials = 10000,  verbosity = 0, board_dims = (4, 4)) # afterwards, a lot faster
+>>> g.trials(n_trials = 1, verbosity = 0, board_dims = (4, 4)) # initial hashmap building takes ~5GB and 8min on my computer
+>>> g.trials(n_trials = 10000, verbosity = 0, board_dims = (4, 4)) # afterwards, a lot faster
 board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 10.039 sec
->>> g.trials(n_trials = 1,      verbosity = 1, board_dims = (4, 4)) # print the board for details. 1 trial completed in 0.002 sec
+>>> g.trials(n_trials = 1, verbosity = 1, board_dims = (4, 4)) # print the board for details. 1 trial completed in 0.002 sec
 ... (board details skiped) ...
 board_dims = (4, 4), X won #: 0, O won #: 0, Draw #: 1, Elapsed time: 0.002 sec
 

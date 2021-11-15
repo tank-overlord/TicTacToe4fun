@@ -323,4 +323,4 @@ class game():
             else:
                 draw += 1
         end = time.time()
-        print(f"X won #: {x_won}, O won #: {o_won}, Draw #: {draw:,d}, Elapsed time: {end - start:.3f} sec")
+        print(f"board_dims = {self.board_dims}, X won #: {x_won}, O won #: {o_won}, Draw #: {draw:,d}, Elapsed time: {end - start:.3f} sec")

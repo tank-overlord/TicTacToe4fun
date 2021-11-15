@@ -35,9 +35,13 @@ Execute
 
 >>> from TicTacToe4fun import game
 >>> g = game()
->>> g.trials(n_trials = 10000)
+>>> g.trials(n_trials = 10000,  verbosity = 0, board_dims = (3, 3))
 X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.719 sec
->>> g.trials(n_trials = 1, verbosity = 1)
+>>> g.trials(n_trials = 1,      verbosity = 1, board_dims = (3, 3))
+>>> ...
+>>> g.trials(n_trials = 10000,  verbosity = 0, board_dims = (4, 4))
+X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 5.090 sec
+>>> g.trials(n_trials = 1,      verbosity = 1, board_dims = (4, 4))
 
 
 Sample Screenshot

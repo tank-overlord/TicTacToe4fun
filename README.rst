@@ -33,11 +33,11 @@ Install
 Execute
 -------
 
->>> from TicTacToe4fun import play
->>> game = play()
->>> game.trials(n_trials=10000)
+>>> from TicTacToe4fun import game
+>>> g = game()
+>>> g.trials(n_trials=10000)
 X won #: 0, O won #: 0, Draw #: 10,000, Elapsed time: 0.600 sec
->>> game.trials(verbosity=1, n_trials=1)
+>>> g.trials(verbosity=1, n_trials=1)
 
 
 Sample Screenshot

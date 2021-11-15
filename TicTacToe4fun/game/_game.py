@@ -344,6 +344,7 @@ class game():
             self.snapshot2 = tracemalloc.take_snapshot()
             stats2 = self.snapshot2.statistics('lineno') # https://docs.python.org/3/library/tracemalloc.html
             memory_allocated2 = sum(stat.size for stat in stats2)
+            tracemalloc.stop()
             add_info = f", incremental memory allocated: {(memory_allocated2 - memory_allocated1):,d} KiB"
         else:
             add_info = ""

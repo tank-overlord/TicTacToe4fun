@@ -1,3 +1,6 @@
+version 0.0.7: add arguments to trials()
+
+
 Nov 14, 2021
 ------------
 version 0.0.6: in addition to 3x3, also include board_dims of 4x4, which will take about ~8min and ~5GB memory for the initial hashmap building

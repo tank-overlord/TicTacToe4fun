@@ -16,9 +16,6 @@ class game():
     def __init__(self):
         self.maximizer_score_history, self.minimizer_score_history = {}, {}
         self.X_all_scores_history, self.O_all_scores_history = {}, {}
-        self.use_alpha_beta_pruning = True
-        self.use_hashmap = True
-        self.test_early_draw = False # when horizontal, vertical, diagnoal has OX, thus impossible to win (not much help with memory though)
 
     def find_empty_squares(self, B: dict = None):
         return [key for key in B if B[key] == ' ']
@@ -167,6 +164,8 @@ class game():
                         alpha = max(alpha, best_score)
                         if self.use_alpha_beta_pruning and beta <= alpha:
                             if best_score == 1: # this is to save the alpha beta pruning when used in conjunction with hashmap. if the "best_score" cannot be better, it must be the best_score
+                                if self.verbosity >= 2:
+                                    print('β cutoff')
                                 break # parent beta cutoff
                     self.maximizer_score_history[str_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
                 return self.maximizer_score_history[str_B]['best_score']
@@ -181,6 +180,8 @@ class game():
                     best_score = max(best_score, score)
                     alpha = max(alpha, best_score)
                     if self.use_alpha_beta_pruning and beta <= alpha:
+                        if self.verbosity >= 2:
+                            print('β cutoff')
                         break # parent beta cutoff
                 return best_score
         else: # O ("beta" player) plays
@@ -197,6 +198,8 @@ class game():
                         beta = min(beta, best_score)
                         if self.use_alpha_beta_pruning and beta <= alpha:
                             if best_score == -1: # this is to save the alpha beta pruning when used in conjunction with hashmap. if the "best_score" cannot be better, it must be the best_score
+                                if self.verbosity >= 2:
+                                    print('α cutoff')
                                 break # parent alpha cutoff
                     self.minimizer_score_history[str_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
                 return self.minimizer_score_history[str_B]['best_score']
@@ -211,10 +214,12 @@ class game():
                     best_score = min(best_score, score)
                     beta = min(beta, best_score)
                     if self.use_alpha_beta_pruning and beta <= alpha:
+                        if self.verbosity >= 2:
+                            print('α cutoff')
                         break # parent alpha cutoff
                 return best_score
 
-    def minimax_vs_minimax(self, verbosity = 0):
+    def minimax_vs_minimax(self):
         """
         board_dims = (r, c)
         """
@@ -222,15 +227,15 @@ class game():
         for r in range(1, self.board_dims[0]+1):
             for c in range(1, self.board_dims[1]+1):
                 B[(r,c)] = ' '
-        #if verbosity == 1:
-        #    self.printboard(B)
-        """
-        if random.randint(1,2) == 1:
-            turn = 'X'
+        if self.verbosity >= 2:
+            self.printboard(B = B)
+        if self.use_alternating_starting_turn:
+            if random.randint(1,2) == 1:
+                turn = 'X'
+            else:
+                turn = 'O'
         else:
-            turn = 'O'
-        """
-        turn = 'X'
+            turn = 'X'
         while self.checkwin(B) is None:
             str_B = str(B)
             if turn == 'X':
@@ -297,14 +302,20 @@ class game():
                             omove = square
                 B[omove] = 'O'
                 turn = 'X'
-            if verbosity == 1:
+            if self.verbosity >= 1:
                 self.printboard(B = B)
         return self.checkwin(B = B)
 
-    def trials(self, verbosity = 0, n_trials = 10000, board_dims = (3, 3)):
+    def trials(self, n_trials = 10000, verbosity = 0, board_dims = (3, 3), use_hashmap = True, use_alpha_beta_pruning = True, test_early_draw = False, use_alternating_starting_turn = False):
         """
         board_dims = (r, c)
         """
+        self.use_hashmap = use_hashmap
+        self.use_alpha_beta_pruning = use_alpha_beta_pruning
+        self.test_early_draw = test_early_draw # when horizontal, vertical, diagnoal has OX, thus impossible to win (not much help with memory though)
+        self.use_alternating_starting_turn = use_alternating_starting_turn # if True, it randomly choose whether it starts out with 'X' or 'O'; otherwise, always 'X' 
+        self.verbosity = verbosity # 0: nothing, 1: printboard, 2: printboard + alpha-beta pruning msg
+        #
         if board_dims[0] != board_dims[1]:
             print('Error: it must be a square board')
             exit(1)
@@ -313,9 +324,9 @@ class game():
         x_won, o_won, draw = 0, 0, 0
         start = time.time()
         for i in range(1, n_trials+1):
-            if verbosity == 1:
+            if self.verbosity == 1:
                 print(f"--------\nGame #{i}\n")
-            res = self.minimax_vs_minimax(verbosity = verbosity)
+            res = self.minimax_vs_minimax()
             if res == 1:
                 x_won += 1
             elif res == -1:

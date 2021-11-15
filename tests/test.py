@@ -4,8 +4,8 @@
 #
 # License: MIT
 
-from TicTacToe4fun import play
-game = play()
-game.trials(n_trials=10000)
-game.trials(verbosity=1, n_trials=1)
+from TicTacToe4fun import game
+g = game()
+g.trials(n_trials=10000)
+g.trials(verbosity=1, n_trials=1)
 

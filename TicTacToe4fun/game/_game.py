@@ -11,7 +11,7 @@ import time
 Key takeaway: you need to visit all the terminal leaf nodes in order to get the global best scores.
 """
 
-class play():
+class game():
 
     def __init__(self):
         self.use_alpha_beta_pruning = True

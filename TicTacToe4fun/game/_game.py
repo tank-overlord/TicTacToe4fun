@@ -307,7 +307,7 @@ class game():
                 self.printboard(B = B)
         return self.checkwin(B = B)
 
-    def trials(self, n_trials = 10000, verbosity = 0, board_dims = (3, 3), use_hashmap = True, use_alpha_beta_pruning = True, test_early_draw = False, use_alternating_starting_turn = False, track_memory_usage = True):
+    def trials(self, n_trials = 10000, verbosity = 0, board_dims = (3, 3), use_hashmap = True, use_alpha_beta_pruning = True, test_early_draw = False, use_alternating_starting_turn = False, track_memory_usage = False):
         """
         board_dims = (r, c)
         """

@@ -1,4 +1,5 @@
 version 0.0.7: add arguments to trials(), and trace memory allocation
+               add preload hashmap
 
 
 Nov 14, 2021

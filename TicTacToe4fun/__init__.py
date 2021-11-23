@@ -10,10 +10,11 @@ from .__about__ import (
     __license__,
 )
 
-from .game import game
+from .game import game, tictactoe
+
 
 # this is for "from <package_name> import *"
-__all__ = ["game", ]
+__all__ = ["game", "tictactoe", ]
 
 
 

@@ -4,7 +4,7 @@
 #
 # License: MIT
 
-from ._game import game
+from ._game import game, tictactoe
 
 # this is for "from <package_name>.game import *"
-__all__ = ["game",]
+__all__ = ["game","tictactoe"]

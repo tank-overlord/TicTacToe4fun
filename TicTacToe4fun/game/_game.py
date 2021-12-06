@@ -44,7 +44,7 @@ class tictactoe(object):
 
     def build_hashmap(self):
         self.trials(n = 3, verbosity = 0, n_trials = 10000, use_alpha_beta_pruning = True, use_hashmap = True)
-        self.trials(n = 4, verbosity = 0, n_trials = 1,     use_alpha_beta_pruning = True, use_hashmap = True)
+        #self.trials(n = 4, verbosity = 0, n_trials = 1,     use_alpha_beta_pruning = True, use_hashmap = True)
         with open('./TicTacToe4fun/hashmap/maximizer_best_moves.gz', 'wb') as fp:
             fp.write(zlib.compress(pickle.dumps(self.maximizer_best_moves_hashmap, pickle.HIGHEST_PROTOCOL),9))
             fp.close()
@@ -249,7 +249,7 @@ class tictactoe(object):
                 self.printboard()
         return self.checkwin()
 
-    def trials(self, n_trials: int = 1, verbosity: int = 0, use_hashmap: bool = True, use_alpha_beta_pruning: bool = True, n: int = 3):
+    def trials(self, n_trials: int = 1, verbosity: int = 1, use_hashmap: bool = True, use_alpha_beta_pruning: bool = True, n: int = 3):
         self.n = n  # board size
         self.verbosity = verbosity
         self.use_hashmap = use_hashmap
@@ -409,10 +409,10 @@ class game():
         score = self.checkwin(B = B)
         if score is not None:
             return score
-        str_B = str(B)
+        key_B = tuple(B)
         if isMaximizing: # X ("alpha" player) plays
             if self.use_hashmap:
-                if str_B not in self.maximizer_score_history:
+                if key_B not in self.maximizer_score_history:
                     best_score = float('-inf')
                     available_moves = self.find_available_moves(B = B)
                     available_moves = random.sample(available_moves, len(available_moves))
@@ -427,8 +427,8 @@ class game():
                                 if self.verbosity >= 2:
                                     print('β cutoff')
                                 break # parent beta cutoff
-                    self.maximizer_score_history[str_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
-                return self.maximizer_score_history[str_B]['best_score']
+                    self.maximizer_score_history[key_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
+                return self.maximizer_score_history[key_B]['best_score']
             else:
                 best_score = float('-inf')
                 available_moves = self.find_available_moves(B = B)
@@ -446,7 +446,7 @@ class game():
                 return best_score
         else: # O ("beta" player) plays
             if self.use_hashmap:
-                if str_B not in self.minimizer_score_history:
+                if key_B not in self.minimizer_score_history:
                     best_score = float('+inf')
                     available_moves = self.find_available_moves(B = B)
                     available_moves = random.sample(available_moves, len(available_moves))
@@ -461,8 +461,8 @@ class game():
                                 if self.verbosity >= 2:
                                     print('α cutoff')
                                 break # parent alpha cutoff
-                    self.minimizer_score_history[str_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
-                return self.minimizer_score_history[str_B]['best_score']
+                    self.minimizer_score_history[key_B] = {'alpha': alpha, 'beta': beta, 'best_score': best_score}
+                return self.minimizer_score_history[key_B]['best_score']
             else:
                 best_score = float('+inf')
                 available_moves = self.find_available_moves(B = B)
@@ -497,13 +497,15 @@ class game():
         else:
             turn = 'X'
         while self.checkwin(B) is None:
-            str_B = str(B)
+            key_B = tuple(B)
+            available_moves = self.find_available_moves(B)
+            available_moves = random.sample(available_moves, len(available_moves))
             if turn == 'X':
                 if self.use_hashmap:
-                    if str_B not in self.X_all_scores_history:
+                    if key_B not in self.X_all_scores_history:
                         X_all_scores = {}
                         X_best_score = float('-inf')
-                        for square in self.find_available_moves(B):
+                        for square in available_moves:
                             B[square] = 'X'
                             score = self.minimax_score(B = B, isMaximizing = False) # see what score 'X' can still have in this situation, assuming 'O' plays optimally next
                             B[square] = ' '
@@ -512,15 +514,13 @@ class game():
                             else:
                                 X_all_scores[score] = [square,]
                             X_best_score = max(score, X_best_score)
-                        self.X_all_scores_history[str_B] = {'X_all_scores': X_all_scores, 'X_best_score': X_best_score}
-                    this_dict = self.X_all_scores_history[str_B]
+                        self.X_all_scores_history[key_B] = {'X_all_scores': X_all_scores, 'X_best_score': X_best_score}
+                    this_dict = self.X_all_scores_history[key_B]
                     X_all_scores = this_dict['X_all_scores']
                     X_best_score = this_dict['X_best_score']
                     xmove = random.sample(X_all_scores[X_best_score], 1)[0]
                 else:
                     X_best_score = float('-inf')
-                    available_moves = self.find_available_moves(B)
-                    available_moves = random.sample(available_moves, len(available_moves))
                     for square in available_moves:
                         B[square] = 'X'
                         score = self.minimax_score(B = B, isMaximizing = False) # see what score 'X' can still have in this situation, assuming 'O' plays optimally next
@@ -532,10 +532,10 @@ class game():
                 turn = 'O'
             else:
                 if self.use_hashmap:
-                    if str_B not in self.O_all_scores_history:
+                    if key_B not in self.O_all_scores_history:
                         O_all_scores = {}
                         O_best_score = float('+inf')
-                        for square in self.find_available_moves(B):
+                        for square in available_moves:
                             B[square] = 'O'
                             score = self.minimax_score(B = B, isMaximizing = True) # see what score 'O' can still have in this situation, assuming 'X' plays optimally next
                             B[square] = ' '
@@ -544,15 +544,13 @@ class game():
                             else:
                                 O_all_scores[score] = [square,]
                             O_best_score = min(score, O_best_score)
-                        self.O_all_scores_history[str_B] = {'O_all_scores': O_all_scores, 'O_best_score': O_best_score}
-                    this_dict = self.O_all_scores_history[str_B]
+                        self.O_all_scores_history[key_B] = {'O_all_scores': O_all_scores, 'O_best_score': O_best_score}
+                    this_dict = self.O_all_scores_history[key_B]
                     O_all_scores = this_dict['O_all_scores']
                     O_best_score = this_dict['O_best_score']                
                     omove = random.sample(O_all_scores[O_best_score], 1)[0]
                 else:
                     O_best_score = float('+inf')
-                    available_moves = self.find_available_moves(B)
-                    available_moves = random.sample(available_moves, len(available_moves))
                     for square in available_moves:
                         B[square] = 'O'
                         score = self.minimax_score(B = B, isMaximizing = True) # see what score 'O' can still have in this situation, assuming 'X' plays optimally next
